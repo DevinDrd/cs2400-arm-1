@@ -8,8 +8,7 @@
 		
 		;		Your code here
 		
-		;numbers	DCD		0xA0BCFF0D, 0xFFF0ADEA
-numbers	DCD		0x12, 0x24
+numbers	DCD		0xA0BCFF0D, 0xFFF0ADEA
 result	FILL		8
 carry	FILL		4
 		
@@ -51,13 +50,13 @@ carry	FILL		4
 		ADC		r1, r1, r2, LSR #16	;MSB 32 bits
 		STR		r3, [r0], #4		;store LSB
 		STR		r1, [r0]			;store MSB
-		ADR		r0, result
+		ADR		r0, carry
 		MOVCC	r2, #0
 		MOVCS	r2, #1
 		STR		r2, [r0]
 		END
-
-		;Multiply uses	r8 for operand 1, r9 for operand 2, r10 for result
+		
+		;Multiply	uses	r8 for operand 1, r9 for operand 2, r10 for result
 mul		MOV		r10, #0		;initialize result register
 		
 loop		MOVS		r9, r9, lsr #1	;shifts r9 (b) right 1, writes that back to r9, and sets the status flags
